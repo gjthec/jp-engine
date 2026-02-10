@@ -1,0 +1,8 @@
+{
+  "name": "JP Engine",
+  "description": "A high-end, industrial-style landing page for a senior full-stack developer focusing on custom systems and high-performance engines.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
