@@ -27,10 +27,10 @@ export const Footer: React.FC = () => {
           </a>
           
           <a 
-            href="mailto:hello@jpengine.studio"
+            href="mailto:bugsescripts@hotmail.com"
             className="text-slate-500 hover:text-white transition-colors text-lg font-medium border-b border-transparent hover:border-white/20 pb-1"
           >
-            hello@jpengine.studio
+            bugsescripts@hotmail.com
           </a>
         </div>
       </div>
