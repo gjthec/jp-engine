@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
@@ -27,7 +26,8 @@ export const GeminiAIAssistant: React.FC = () => {
     setLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      // Corrected initialization to use process.env.API_KEY directly
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: userMsg,
@@ -51,6 +51,7 @@ export const GeminiAIAssistant: React.FC = () => {
         }
       });
 
+      // Use the .text property directly from the response
       const botText = response.text || 'Desculpe, tive um pequeno lapso. Poderia repetir?';
       setMessages(prev => [...prev, { role: 'bot', text: botText }]);
     } catch (error) {

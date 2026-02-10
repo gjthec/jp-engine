@@ -4,7 +4,7 @@ import { Award, Briefcase, MapPin } from 'lucide-react';
 
 export const Credentials: React.FC = () => {
   return (
-    <section className="py-32 container mx-auto px-6 border-y border-white/5 bg-white/[0.01]">
+    <section id="credentials" className="py-32 container mx-auto px-6 border-y border-white/5 bg-white/[0.01]">
       <div className="grid lg:grid-cols-2 gap-20 items-center">
         <div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-tighter">

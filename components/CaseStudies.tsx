@@ -29,9 +29,12 @@ export const CaseStudies: React.FC = () => {
             Não entregamos apenas código. Entregamos soluções que resolvem problemas reais de negócio.
           </p>
         </div>
-        <button className="text-blue-400 font-bold hover:text-blue-300 transition-colors flex items-center gap-2">
+        <a 
+          href="#portfolio"
+          className="text-blue-400 font-bold hover:text-blue-300 transition-colors flex items-center gap-2"
+        >
           Ver todos os projetos <ExternalLink size={18} />
-        </button>
+        </a>
       </div>
 
       <div className="grid md:grid-cols-2 gap-12">
