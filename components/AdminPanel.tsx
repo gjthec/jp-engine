@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Plus, Trash2, Save, ArrowLeft, LayoutGrid, Loader2 
+  Plus, Trash2, Save, ArrowLeft, LayoutGrid, Loader2, Wand2, Sparkles 
 } from 'lucide-react';
 import { db, isFirebaseEnabled } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
+import { GoogleGenAI } from '@google/genai';
 
 interface Project {
   id: string;
@@ -26,9 +27,45 @@ interface AdminPanelProps {
 export const AdminPanel: React.FC<AdminPanelProps> = ({ projects, onUpdate, isFirebaseOn }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
   const [newProject, setNewProject] = useState<Partial<Project>>({
     title: '', category: '', image: '', url: '', description: '', rating: 5
   });
+
+  const handleAiGenerate = async () => {
+    if (!newProject.title || !newProject.category) {
+      alert("Por favor, preencha o Título e a Categoria para que a IA possa gerar a especificação.");
+      return;
+    }
+
+    setAiLoading(true);
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const prompt = `Você é um Engenheiro de Software Sênior e arquiteto de soluções na JP Engine. 
+      Gere uma descrição técnica sofisticada e impactante (em português do Brasil) para um projeto web chamado "${newProject.title}" na categoria "${newProject.category}".
+      O site está disponível em: ${newProject.url || 'ambiente de produção restrito'}.
+      
+      Diretrizes:
+      - Mencione tecnologias de ponta (Next.js, React 19, Node.js, Tailwind CSS).
+      - Foque em escalabilidade, performance Lighthouse 100, e UI/UX de nível premium.
+      - O tom deve ser profissional, industrial e atraente para clientes de alto ticket.
+      - Limite o texto a aproximadamente 150-200 caracteres para ser direto.`;
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: prompt
+      });
+
+      if (response.text) {
+        setNewProject(prev => ({ ...prev, description: response.text.trim() }));
+      }
+    } catch (error) {
+      console.error("Erro na IA:", error);
+      alert("Falha ao gerar especificações com IA.");
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,7 +140,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ projects, onUpdate, isFi
 
         <div className="grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-1">
-            <div className="glass p-8 rounded-[32px] sticky top-12 border-blue-500/10">
+            <div className="glass p-8 rounded-[32px] sticky top-12 border-blue-500/10 shadow-[0_0_50px_rgba(37,99,235,0.05)]">
               <h3 className="text-white font-bold mb-6 flex items-center gap-2">
                 <Plus size={18} className="text-blue-500" /> Nova Engine
               </h3>
@@ -112,8 +149,31 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ projects, onUpdate, isFi
                 <input placeholder="Segmento (Ex: E-commerce)" value={newProject.category} onChange={e => setNewProject({...newProject, category: e.target.value})} className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500/50 outline-none transition-colors" required />
                 <input placeholder="URL Imagem (Assets)" value={newProject.image} onChange={e => setNewProject({...newProject, image: e.target.value})} className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500/50 outline-none transition-colors" required />
                 <input placeholder="URL Site (Deployment)" value={newProject.url} onChange={e => setNewProject({...newProject, url: e.target.value})} className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500/50 outline-none transition-colors" required />
-                <textarea placeholder="Especificações técnicas..." value={newProject.description} onChange={e => setNewProject({...newProject, description: e.target.value})} className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500/50 outline-none h-32 resize-none transition-colors" required />
-                <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black text-[10px] uppercase tracking-[0.3em] py-5 rounded-xl transition-all flex items-center justify-center gap-2">
+                
+                <div className="relative">
+                  <textarea 
+                    placeholder="Especificações técnicas..." 
+                    value={newProject.description} 
+                    onChange={e => setNewProject({...newProject, description: e.target.value})} 
+                    className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500/50 outline-none h-32 resize-none transition-colors pr-12" 
+                    required 
+                  />
+                  <button 
+                    type="button"
+                    onClick={handleAiGenerate}
+                    disabled={aiLoading}
+                    title="Gerar especificações com IA"
+                    className="absolute top-3 right-3 w-8 h-8 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/20 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all group"
+                  >
+                    {aiLoading ? <Loader2 size={14} className="animate-spin" /> : <Wand2 size={14} className="group-hover:rotate-12 transition-transform" />}
+                  </button>
+                  <div className="absolute bottom-3 right-3 flex items-center gap-1 opacity-40 pointer-events-none">
+                    <Sparkles size={10} className="text-blue-500" />
+                    <span className="text-[8px] font-black uppercase tracking-widest text-blue-500">Gemini AI</span>
+                  </div>
+                </div>
+
+                <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black text-[10px] uppercase tracking-[0.3em] py-5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20">
                   {loading ? <Loader2 size={16} className="animate-spin" /> : <><Save size={14} /> Registrar Engine</>}
                 </button>
               </form>

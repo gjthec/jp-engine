@@ -216,43 +216,7 @@ const App: React.FC = () => {
   const [updateTrigger, setUpdateTrigger] = useState(0);
 
   const initialProjects: Project[] = [
-    { 
-      id: '1', 
-      title: "Lumina Skincare", 
-      category: "E-commerce Premium", 
-      image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=1200", 
-      url: "https://demo.vercel.store", 
-      description: "Uma experiência de compra ultra-minimalista desenvolvida com foco no mercado de luxo, utilizando Next.js para renderização instantânea.", 
-      rating: 4.9,
-      reviews: [
-        { id: 'r1', userName: "Clarissa Mendes", rating: 5, comment: "O design elevou o ticket médio da nossa loja em 40%. Impecável.", date: "12 Mar 2024" },
-        { id: 'r2', userName: "Roberto Dias", rating: 4, comment: "Velocidade impressionante em dispositivos móveis.", date: "05 Fev 2024" }
-      ]
-    },
-    { 
-      id: '2', 
-      title: "Nova Bank App", 
-      category: "Interface Fintech", 
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1200", 
-      url: "https://stripe.com/br", 
-      description: "Arquitetura de interface para sistemas financeiros complexos, focada em segurança, clareza visual e gestão de dados em larga escala.", 
-      rating: 5.0,
-      reviews: [
-        { id: 'r3', userName: "Tech Lead @FinHub", rating: 5, comment: "O JP entendeu complexidades que outros designers ignoraram.", date: "20 Jan 2024" }
-      ]
-    },
-    { 
-      id: '3', 
-      title: "Architex Portfolio", 
-      category: "Creative Site", 
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200", 
-      url: "https://www.apple.com/br/macbook-pro/", 
-      description: "Galeria digital imersiva projetada para estúdios de arquitetura, com foco em transições cinematográficas e alta fidelidade visual.", 
-      rating: 4.8,
-      reviews: [
-        { id: 'r4', userName: "André Z.", rating: 5, comment: "Um portfólio que respira sofisticação. Exatamente o que precisávamos.", date: "15 Dez 2023" }
-      ]
-    }
+
   ];
 
   useEffect(() => {
