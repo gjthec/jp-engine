@@ -42,7 +42,7 @@ const Home: React.FC<{ projects: Project[] }> = ({ projects }) => {
   const [scrolled, setScrolled] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [iframeLoading, setIframeLoading] = useState(true);
-  const [showSpecs, setShowSpecs] = useState(true);
+  const [showSpecs, setShowSpecs] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -53,7 +53,7 @@ const Home: React.FC<{ projects: Project[] }> = ({ projects }) => {
   useEffect(() => {
     if (selectedProject) {
       setIframeLoading(true);
-      setShowSpecs(true);
+      setShowSpecs(false); // Sempre abre o Preview primeiro
     }
   }, [selectedProject]);
 
@@ -99,7 +99,7 @@ const Home: React.FC<{ projects: Project[] }> = ({ projects }) => {
                    onClick={() => setShowSpecs(!showSpecs)}
                    className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${showSpecs ? 'bg-blue-600 text-white border-blue-500' : 'bg-white/5 text-slate-400 border-white/10 hover:bg-white/10'}`}
                  >
-                   {showSpecs ? 'Ver Preview' : 'Ver Specs'}
+                   {showSpecs ? 'Ver Preview' : 'Ver Detalhes'}
                  </button>
                  <button onClick={() => setSelectedProject(null)} className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-white transition-all">
                    <X size={20} />
@@ -216,7 +216,7 @@ const App: React.FC = () => {
   const [updateTrigger, setUpdateTrigger] = useState(0);
 
   const initialProjects: Project[] = [
-
+    
   ];
 
   useEffect(() => {
