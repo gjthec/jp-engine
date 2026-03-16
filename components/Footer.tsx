@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
             Instagram
           </a>
           <a 
-            href="https://www.linkedin.com/in/joao-pedro-9a1328247/" 
+            href="https://www.linkedin.com/in/jo%C3%A3o-pedro-9a1328247/" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-2 hover:text-white transition-colors group"
