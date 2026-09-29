@@ -1,36 +1,33 @@
 
 import React from 'react';
-import { Mail, Instagram, Linkedin, ArrowRight, MessageCircle } from 'lucide-react';
+import { Instagram, Linkedin } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const Footer: React.FC = () => {
-  const whatsappUrl = "https://wa.me/5535998842525?text=Olá%20JP,%20vi%20seu%20portfolio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.";
+  const whatsappUrl = "https://wa.me/5547997924851?text=Olá%20JP,%20vi%20seu%20portfolio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.";
   
   return (
     <footer id="contact" className="py-32 container mx-auto px-6 border-t border-white/5">
-      <div className="max-w-4xl mx-auto text-center mb-32">
-        <h2 className="text-5xl md:text-7xl font-bold text-white mb-12 tracking-tighter">
-          Vamos criar algo <br />
-          <span className="serif italic font-normal text-blue-400">memorável?</span>
-        </h2>
-        
-        <div className="flex flex-col items-center gap-8">
-          <a 
+      <div className="relative mx-auto mb-28 max-w-4xl overflow-hidden rounded-[2rem] border border-white/[0.08] bg-gradient-to-b from-white/[0.035] to-transparent px-6 py-16 text-center md:mb-32 md:py-20">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-[32rem] -translate-x-1/2 rounded-full bg-blue-500/[0.08] blur-[100px]" />
+        <div className="relative">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-4 py-2 text-[9px] font-black uppercase tracking-[0.3em] text-slate-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" /> Novos projetos
+          </div>
+          <h2 className="mb-10 text-5xl font-bold tracking-tighter text-white md:text-7xl">
+            Vamos criar algo<br />
+            <span className="serif italic font-normal text-blue-400">memorável?</span>
+          </h2>
+
+          <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-6 text-2xl md:text-4xl font-bold text-white hover:text-blue-400 transition-colors"
+            aria-label="Falar pelo WhatsApp no número +55 47 99792-4851"
+            title="Falar no WhatsApp"
+            className="group inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black"
           >
-            Falar no WhatsApp
-            <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-green-500 group-hover:border-green-500 group-hover:text-white transition-all">
-              <MessageCircle size={32} />
-            </div>
-          </a>
-          
-          <a 
-            href="mailto:bugsescripts@hotmail.com"
-            className="text-slate-500 hover:text-white transition-colors text-lg font-medium border-b border-transparent hover:border-white/20 pb-1"
-          >
-            bugsescripts@hotmail.com
+            <WhatsAppIcon className="h-10 w-10 transition-transform group-hover:scale-105" />
           </a>
         </div>
       </div>
