@@ -6,6 +6,7 @@ import { Hero } from './components/Hero';
 import { TechStack } from './components/TechStack';
 import { Features } from './components/Features';
 import { Credentials } from './components/Credentials';
+import { AboutMe } from './components/AboutMe';
 import { Portfolio } from './components/Portfolio';
 import { HowItWorks } from './components/HowItWorks';
 import { CaseStudies } from './components/CaseStudies';
@@ -65,6 +66,7 @@ const Home: React.FC<{ projects: Project[] }> = ({ projects }) => {
         <TechStack />
         <Features />
         <Credentials />
+        <AboutMe />
         <Portfolio projects={projects} onSelectProject={setSelectedProject} isFirebaseOn={isFirebaseEnabled} />
         <HowItWorks />
         <CaseStudies />
@@ -195,7 +197,7 @@ const Home: React.FC<{ projects: Project[] }> = ({ projects }) => {
                     </div>
                     
                     <a 
-                      href="https://wa.me/5535998842525" 
+                      href="https://wa.me/5547997924851" 
                       target="_blank" 
                       className="mt-12 w-full bg-white text-black py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] flex items-center justify-center hover:bg-slate-200 transition-all"
                     >

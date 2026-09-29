@@ -10,7 +10,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const whatsappUrl = "https://wa.me/5535998842525?text=Olá%20JP,%20vi%20seu%20portfolio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.";
+  const whatsappUrl = "https://wa.me/5547997924851?text=Olá%20JP,%20vi%20seu%20portfolio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.";
 
   const handleNavClick = (id: string) => {
     if (location.pathname !== '/') {
@@ -32,10 +32,13 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <div className="w-7 h-7 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center transition-transform group-hover:rotate-12 shrink-0">
             <Layers className="text-black w-4 h-4 md:w-5 md:h-5" />
           </div>
-          <span className="text-white font-bold text-lg md:text-xl tracking-tight whitespace-nowrap">JP <span className="font-light opacity-50">ENGINE</span></span>
+          <span className="brand-galaxy text-lg md:text-xl font-bold tracking-tight whitespace-nowrap">
+            JP <span className="brand-galaxy-engine font-light">ENGINE</span>
+          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 text-[12px] font-medium tracking-wide text-slate-400">
+          <button onClick={() => handleNavClick('about')} className="hover:text-white transition-colors uppercase tracking-widest font-black text-[9px]">Sobre mim</button>
           <button onClick={() => handleNavClick('portfolio')} className="hover:text-white transition-colors uppercase tracking-widest font-black text-[9px]">Trabalhos</button>
           <button onClick={() => handleNavClick('features')} className="hover:text-white transition-colors uppercase tracking-widest font-black text-[9px]">Design</button>
           <button onClick={() => handleNavClick('process')} className="hover:text-white transition-colors uppercase tracking-widest font-black text-[9px]">Método</button>
