@@ -1,0 +1,29 @@
+name: Deploy Vercel (produção)
+
+# Dispara um deploy de produção na Vercel sempre que algo chega na main/master,
+# independentemente de quem fez o push/merge (ex.: gustavodealmeidasc9-source).
+# As URLs dos Deploy Hooks ficam em GitHub Secrets, nunca no código (repo público).
+on:
+  push:
+    branches:
+      - main
+      - master
+
+# Evita deploys concorrentes: se chegarem vários pushes seguidos, roda o mais recente.
+concurrency:
+  group: deploy-producao
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy jp-engine-m873 (www.jpengine.com.br)
+        run: |
+          curl --fail --silent --show-error -X POST \
+            "${{ secrets.VERCEL_DEPLOY_HOOK_M873 }}"
+
+      - name: Deploy jp-engine (jp-engine.vercel.app)
+        run: |
+          curl --fail --silent --show-error -X POST \
+            "${{ secrets.VERCEL_DEPLOY_HOOK_JP_ENGINE }}"
